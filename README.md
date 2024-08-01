@@ -14,7 +14,6 @@ This repository contains the implementation and solutions for the cryptography l
 4. [Usage](#usage)
 5. [Testing](#testing)
 6. [Results](#results)
-7. [License](#license)
 
 ## Project Overview
 
