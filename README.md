@@ -4,8 +4,6 @@
 
 ## Cryptography Lab Assignment - SuffixMAC smht48
 
-## Overview
-
 This repository contains the implementation and solutions for the cryptography lab assignment focused on Generic Attacks on SuffixMAC. The lab explores the construction and vulnerabilities of the SuffixMAC, a message authentication code derived from hash functions. Specifically, we implemented the `smht48` MAC function, conducted an exhaustive search for low-weight keys, and explored existential forgery attacks using collisions.
 
 ## Table of Contents
