@@ -2,67 +2,91 @@
 
 # Introduction to Cryptology: Generic Attacks on SuffixMAC
 
+## Cryptography Lab Assignment - SuffixMAC smht48
+
 ## Overview
 
 This repository contains the implementation and solutions for the cryptography lab assignment focused on Generic Attacks on SuffixMAC. The lab explores the construction and vulnerabilities of the SuffixMAC, a message authentication code derived from hash functions. Specifically, we implemented the `smht48` MAC function, conducted an exhaustive search for low-weight keys, and explored existential forgery attacks using collisions.
 
-## Contents
+## Table of Contents
 
-- **Problem Interpretation**: A brief interpretation of the problem statement and the goals of the lab.
-- **SuffixMAC smht48**:
-  - **Q1**: Implementation of the `smht48` function.
-  - **Q2**: Verification of the implementation using provided test vectors.
-- **Exhaustive Search for a Low-weight Key**:
-  - **Q3**: Implementation of the `keyrec` function to find a key with a given tag.
-  - **Q4**: Discussion on how a key-recovery attack can lead to a universal forgery attack and vice versa.
-- **Existential Forgeries from Collisions**:
-  - **Q5**: Explanation of how collisions in the hash function lead to existential forgeries in SuffixMAC.
-  - **Q6**: Implementation of the `colsearch` function for finding collisions and the `smht48ef` function for generating existential forgeries.
+1. [Project Overview](#project-overview)
+2. [Implementation Details](#implementation-details)
+3. [Installation and Compilation](#installation-and-compilation)
+4. [Usage](#usage)
+5. [Testing](#testing)
+6. [Results](#results)
+7. [License](#license)
+
+## Project Overview
+
+### SuffixMAC smht48
+
+The SuffixMAC is a method of transforming a hash function into a Message Authentication Code (MAC). The construction uses a hash function `H` to generate a MAC for a message `m` using a key `k`. In this project, we implement a toy version, `smht48`, using the provided toy hash function `ht48`.
+
+**Function Signature:**
+
+```c
+void smht48(const uint8_t k[static 6], uint64_t blen, const uint8_t m[blen], uint8_t h[static 6]);
+```
+
+**Inputs:**
+- `k`: A 48-bit key stored as an array of 6 bytes.
+- `blen`: The byte length of `m`, stored as a 64-bit value.
+- `m`: The message to be hashed, with an integral number of bytes.
+- `h`: Placeholder for the 48-bit resulting tag, stored as an array of 6 bytes.
 
 ## Implementation Details
 
-### 1. The SuffixMAC `smht48`
+The project includes the following components:
+1. **smht48 Implementation**: The core SuffixMAC function.
+2. **Key Recovery (keyrec)**: A function to find a specific key using an exhaustive search.
+3. **Collision Search (colsearch)**: A function to find message collisions for the hash function.
+4. **Existential Forgery (smht48ef)**: A function demonstrating existential forgery using collisions.
 
-The `smht48` function is a generic transformation of a hash function into a MAC. It appends a secret key to the message before hashing. In this implementation, we use a toy version called `ht48` as the underlying hash function. The function signature and implementation details are provided in the source code.
+## Installation and Compilation
 
-### 2. Key Recovery (`keyrec`)
+To compile the project, use the provided Makefile. Ensure that you have a compatible C compiler installed.
 
-The `keyrec` function performs an exhaustive search to find a key of specific bit weight that produces a given tag for a fixed message. This task demonstrates the vulnerability of SuffixMAC to exhaustive search attacks, especially when additional information about the key (like its bit weight) is known.
+### Makefile Usage
 
-### 3. Existential Forgery Attacks
+- **Build the project:**
+  ```sh
+  make all
+  ```
 
-Existential forgery attacks exploit the collision resistance weakness in the underlying hash function `ht48`. By finding two different messages that produce the same hash output, we can forge valid MACs for new messages without knowing the secret key.
+- **Clean the build:**
+  ```sh
+  make clean
+  ```
+
+- **Run the main program:**
+  ```sh
+  make run
+  ```
+
+- **Test the implementation:**
+  ```sh
+  make test
+  ```
 
 ## Usage
 
-To run the implementation, compile the source files and execute the main program. Ensure that your environment supports C programming and has the necessary permissions to execute the compiled binary.
+After compiling, the executable will be generated in the `bin` directory. You can run the executable to see the outputs of different functions and test cases.
 
-### Compilation
-
-```bash
-gcc -o cryptolab smht48.c keyrec.c colsearch.c
+```sh
+./bin/crypto_lab
 ```
 
-### Execution
+## Testing
 
-```bash
-./cryptolab
-```
+The project includes several test cases to verify the implementation:
+1. **Test Vectors for smht48**: To validate the correctness of the SuffixMAC implementation.
+2. **Key Recovery Tests**: To check the performance and accuracy of the key recovery function.
+3. **Collision Search and Forgery Tests**: To demonstrate the collision finding and existential forgery capabilities.
 
 ## Results
 
-The solutions include:
-- The correct implementation and verification of the `smht48` function.
-- Successful recovery of a key using the `keyrec` function.
-- Demonstration of existential forgery attacks using the `colsearch` and `smht48ef` functions.
-
-## Contributing
-
-If you find any issues or have suggestions for improvement, feel free to open an issue or submit a pull request. Contributions are welcome!
+The results of the implementation, including the time taken for key recovery and collision search, as well as the accuracy of the forgery attacks, are documented in the report.
 
 
-## Contact
-
-For any inquiries, please contact [Manar Shehazi](mailto:your.email@example.com).
-
----
